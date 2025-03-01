@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    /* Changed from purple to trust blue */
-    --primary: 210 100% 55%;
+    /* Trust blue primary color */
+    --primary: 210 100% 50%;
     --primary-foreground: 0 0% 98%;
 
     /* Secondary color with more contrast */
@@ -27,8 +27,8 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    /* Changed accent color from purple to trust blue */
-    --accent: 210 100% 55%;
+    /* Trust blue accent color */
+    --accent: 210 100% 50%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -37,7 +37,7 @@
     /* Adjusted border color for better contrast */
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 210 100% 55%;
+    --ring: 210 100% 50%;
 
     --radius: 0.75rem;
   }
@@ -79,7 +79,7 @@
 
   /* Enhanced card hover effect for premium feel */
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-primary/30;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-500/30;
   }
   
   /* Premium glass panel effect */
@@ -89,12 +89,12 @@
 
   /* New premium card styles with improved contrast */
   .premium-card {
-    @apply bg-white rounded-xl p-6 shadow-md border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-primary/30;
+    @apply bg-white rounded-xl p-6 shadow-md border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-500/30;
   }
 
   /* Enhanced gradient backgrounds */
   .gradient-bg-primary {
-    @apply bg-gradient-to-br from-primary/80 to-primary;
+    @apply bg-gradient-to-br from-blue-500/80 to-blue-600;
   }
 
   .gradient-bg-light {
@@ -107,7 +107,7 @@
   }
 
   .faq-question {
-    @apply flex justify-between items-center w-full text-left font-medium text-lg hover:text-primary transition-colors cursor-pointer;
+    @apply flex justify-between items-center w-full text-left font-medium text-lg hover:text-blue-500 transition-colors cursor-pointer;
   }
 
   .faq-answer {

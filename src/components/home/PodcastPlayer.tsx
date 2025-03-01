@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { PodcastEpisodeType } from '@/lib/types';
-import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock, Mic } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock, Mic, ArrowRight } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
 
 const PodcastPlayer = () => {
@@ -59,7 +59,11 @@ const PodcastPlayer = () => {
         }
         
         // Format the publication date
-        const formattedDate = new Date(pubDate).toLocaleDateString();
+        const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
         
         // Create the episode object
         const parsedEpisode: PodcastEpisodeType = {
@@ -77,10 +81,10 @@ const PodcastPlayer = () => {
         
         // Fallback to a static episode if the fetch fails
         const fallbackEpisode: PodcastEpisodeType = {
-          title: "Reaching New Audiences Through Digital Ministry",
+          title: "Revelation Chapter 7",
           audioUrl: "https://cdn.acast.com/audio-output/f30a2a09-3946-452d-9a30-82f4a678bba5/a8f07a8b9dba71cee6b49a21c8c89f40-21dd1bdd-2f0b-4c17-b77c-6077064aaf50.mp3",
-          description: "In this episode, we discuss effective strategies for expanding your church's reach through digital ministry platforms.",
-          pubDate: new Date().toLocaleDateString()
+          description: "Experience the powerful interlude between the sixth and seventh seals as God marks His chosen ones! Witness the sealing of the 144,000 from Israel's tribes and the...",
+          pubDate: "February 28, 2025"
         };
         
         setEpisode(fallbackEpisode);
@@ -189,176 +193,194 @@ const PodcastPlayer = () => {
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section id="podcast" ref={ref} className="section bg-gray-50">
+    <section id="podcast" ref={ref} className="section bg-gray-900 text-white">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 hover-lift">
-              Listen Now
+            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/30 text-blue-400 text-sm font-medium mb-4 hover-lift">
+              Latest Episodes
             </div>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
-            Latest Podcast Episode
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-white ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
+            SermonPod Podcast
           </h2>
           
-          <p className={`text-lg text-gray-600 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
-            Experience the quality and impact of SermonPod's production with our latest episode.
+          <p className={`text-lg text-gray-300 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
+            Experience the quality and impact of SermonPod's production with our latest episodes.
           </p>
         </div>
         
         <div className={`max-w-4xl mx-auto ${getAnimationClass(isInView, 'animate-scale-in', 300)}`}>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover-glow">
+          <div className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-gray-800 shadow-2xl hover-glow">
             {isLoading ? (
               <div className="p-8 text-center">
-                <div className="animate-spin mx-auto w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full mb-4"></div>
-                <p className="text-gray-600">Loading latest episode...</p>
+                <div className="animate-spin mx-auto w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full mb-4"></div>
+                <p className="text-gray-400">Loading latest episode...</p>
               </div>
             ) : loadingError ? (
               <div className="p-8 text-center">
                 <p className="text-red-500 mb-4">{loadingError}</p>
                 <button 
                   onClick={() => window.location.reload()}
-                  className="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+                  className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium"
                 >
                   <RefreshCw className="mr-2 h-4 w-4" />
                   Try again
                 </button>
               </div>
             ) : episode ? (
-              <div className="p-6 md:p-8">
-                <div className="flex flex-col md:flex-row gap-6 mb-6">
-                  {/* Episode Cover Art */}
-                  <div className="w-full md:w-1/3 flex-shrink-0">
-                    <div className="aspect-square bg-gradient-to-br from-primary/80 to-primary rounded-lg shadow-md flex items-center justify-center hover-scale">
-                      <Mic className="h-20 w-20 text-white" />
+              <div>
+                <div className="flex items-center justify-between p-4 border-b border-gray-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center">
+                      <img 
+                        src="/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png" 
+                        alt="SermonPod" 
+                        className="h-8 w-8 object-contain"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-medium text-white">SermonPod Ministries</div>
+                      <div className="text-sm text-gray-400">Latest Episode: {episode.title}</div>
                     </div>
                   </div>
-                  
-                  {/* Episode Info */}
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">{episode.title}</h3>
-                    <p className="text-primary text-sm mb-3">Released: {episode.pubDate}</p>
-                    <p className="text-gray-700 mb-4">{episode.description}</p>
-                    
-                    <div className="flex items-center text-sm text-gray-500 mb-2">
-                      <Clock className="h-4 w-4 mr-1" />
-                      <span>{formatTime(duration)}</span>
-                    </div>
-                    
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Ministry</span>
-                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Church Growth</span>
-                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Digital Outreach</span>
-                    </div>
+                  <div className="flex items-center gap-3">
+                    <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white">
+                      <Volume2 size={18} />
+                    </button>
+                    <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white">
+                      <ArrowRight size={18} />
+                    </button>
                   </div>
                 </div>
                 
-                {/* Custom Audio Player with enhanced contrast */}
-                <div className="rounded-xl bg-gray-100 p-4 border border-gray-200 hover-glow">
-                  <audio ref={audioRef} src={episode.audioUrl} preload="metadata" />
-                  
-                  {/* Progress Bar */}
-                  <div className="relative h-2 bg-gray-300 rounded-full mb-4 cursor-pointer group">
-                    <div 
-                      className="absolute h-full bg-primary rounded-full" 
-                      style={{ width: `${progressPercentage}%` }}
-                    ></div>
-                    <input 
-                      type="range" 
-                      min="0" 
-                      max={duration || 100}
-                      value={currentTime} 
-                      onChange={handleSeek}
-                      className="absolute w-full h-full opacity-0 cursor-pointer"
-                      aria-label="Seek"
-                    />
-                    <div className="absolute h-4 w-4 bg-primary rounded-full top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `${progressPercentage}%`, transform: 'translate(-50%, -50%)' }}></div>
-                  </div>
-                  
-                  {/* Time Display */}
-                  <div className="flex justify-between text-xs text-gray-600 mb-4">
-                    <span>{formatTime(currentTime)}</span>
-                    <span>{formatTime(duration)}</span>
-                  </div>
-                  
-                  {/* Controls */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      {/* Skip Back */}
-                      <button 
-                        onClick={() => handleSkip(-15)}
-                        className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
-                        aria-label="Skip back 15 seconds"
-                      >
-                        <Rewind size={20} />
-                      </button>
-                      
-                      {/* Play/Pause */}
-                      <button 
-                        onClick={togglePlayPause}
-                        className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mx-2 hover:bg-primary/90 transition-colors hover-scale"
-                        aria-label={isPlaying ? "Pause" : "Play"}
-                      >
-                        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-                      </button>
-                      
-                      {/* Skip Forward */}
-                      <button 
-                        onClick={() => handleSkip(15)}
-                        className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
-                        aria-label="Skip forward 15 seconds"
-                      >
-                        <Forward size={20} />
-                      </button>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4">
-                      {/* Playback Speed */}
-                      <button 
-                        onClick={handleSpeedChange}
-                        className="px-2 py-1 text-xs font-medium rounded bg-gray-300 hover:bg-gray-400 transition-colors"
-                        aria-label="Change playback speed"
-                      >
-                        {speed}x
-                      </button>
-                      
-                      {/* Volume Controls */}
-                      <div className="flex items-center">
-                        <button 
-                          onClick={toggleMute}
-                          className="w-8 h-8 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
-                          aria-label={isMuted ? "Unmute" : "Mute"}
-                        >
-                          {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                        </button>
-                        
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="1" 
-                          step="0.01"
-                          value={volume} 
-                          onChange={handleVolumeChange}
-                          className="w-16 h-2 rounded-full appearance-none bg-gray-300 ml-2 cursor-pointer accent-primary"
-                          aria-label="Volume"
+                <div className="p-6">
+                  <div className="flex gap-6 mb-6">
+                    <div className="w-32 h-32 flex-shrink-0">
+                      <div className="w-full h-full rounded-md overflow-hidden bg-gray-800 relative">
+                        <img 
+                          src="/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"
+                          alt="Episode artwork" 
+                          className="w-full h-full object-cover"
                         />
                       </div>
                     </div>
+                    
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2 text-white">{episode.title}</h3>
+                      <p className="text-sm text-gray-400 mb-3">{episode.pubDate}</p>
+                      <p className="text-gray-300 text-sm mb-4">{episode.description}</p>
+                      
+                      <button 
+                        onClick={togglePlayPause}
+                        className="inline-flex items-center justify-center bg-[#8A57FF] hover:bg-[#7A47EF] text-white font-medium py-2 px-4 rounded-md transition-colors"
+                      >
+                        {isPlaying ? (
+                          <>
+                            <Pause size={18} className="mr-2" /> Pause Episode
+                          </>
+                        ) : (
+                          <>
+                            <Play size={18} className="mr-2" /> Play Episode
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="mt-6 text-center">
-                  <a 
-                    href="https://feeds.acast.com/public/shows/67242ddd0e172486e4676e95" 
-                    className="text-primary hover:text-primary/80 font-medium inline-flex items-center transition-colors hover-lift"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Subscribe to our podcast
-                    <ChevronRight className="ml-1 h-4 w-4" />
-                  </a>
+                  
+                  {/* Custom Audio Player with enhanced contrast */}
+                  <div className="mt-6">
+                    <audio ref={audioRef} src={episode.audioUrl} preload="metadata" />
+                    
+                    {/* Progress Bar */}
+                    <div className="relative h-1.5 bg-gray-700 rounded-full mb-2 cursor-pointer group">
+                      <div 
+                        className="absolute h-full bg-blue-500 rounded-full" 
+                        style={{ width: `${progressPercentage}%` }}
+                      ></div>
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max={duration || 100}
+                        value={currentTime} 
+                        onChange={handleSeek}
+                        className="absolute w-full h-full opacity-0 cursor-pointer"
+                        aria-label="Seek"
+                      />
+                    </div>
+                    
+                    {/* Time Display */}
+                    <div className="flex justify-between text-xs text-gray-400 mb-4">
+                      <span>{formatTime(currentTime)}</span>
+                      <span>{formatTime(duration)}</span>
+                    </div>
+                    
+                    {/* Controls */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        {/* Skip Back */}
+                        <button 
+                          onClick={() => handleSkip(-15)}
+                          className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                          aria-label="Skip back 15 seconds"
+                        >
+                          <Rewind size={20} />
+                        </button>
+                        
+                        {/* Play/Pause */}
+                        <button 
+                          onClick={togglePlayPause}
+                          className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-2 hover:bg-blue-600 transition-colors hover-scale"
+                          aria-label={isPlaying ? "Pause" : "Play"}
+                        >
+                          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                        </button>
+                        
+                        {/* Skip Forward */}
+                        <button 
+                          onClick={() => handleSkip(15)}
+                          className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                          aria-label="Skip forward 15 seconds"
+                        >
+                          <Forward size={20} />
+                        </button>
+                      </div>
+                      
+                      <div className="flex items-center space-x-4">
+                        {/* Playback Speed */}
+                        <button 
+                          onClick={handleSpeedChange}
+                          className="px-2 py-1 text-xs font-medium rounded bg-gray-700 hover:bg-gray-600 transition-colors"
+                          aria-label="Change playback speed"
+                        >
+                          {speed}x
+                        </button>
+                        
+                        {/* Volume Controls */}
+                        <div className="flex items-center">
+                          <button 
+                            onClick={toggleMute}
+                            className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                            aria-label={isMuted ? "Unmute" : "Mute"}
+                          >
+                            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                          </button>
+                          
+                          <input 
+                            type="range" 
+                            min="0" 
+                            max="1" 
+                            step="0.01"
+                            value={volume} 
+                            onChange={handleVolumeChange}
+                            className="w-16 h-1.5 rounded-full appearance-none bg-gray-700 ml-2 cursor-pointer accent-blue-500"
+                            aria-label="Volume"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
