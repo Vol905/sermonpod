@@ -62,7 +62,7 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={feature.title}
-              className={`premium-card border-l-4 border-l-primary/40 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`bg-white rounded-xl p-6 shadow-lg border-l-4 border-l-primary border-t border-r border-b border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-primary/20">
                 <feature.icon className="h-6 w-6 text-primary" />

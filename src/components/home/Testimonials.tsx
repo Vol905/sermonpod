@@ -46,19 +46,21 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={testimonial.name}
-              className={`bg-white rounded-xl p-8 shadow-md border border-gray-100 hover-scale hover-glow ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`bg-white rounded-xl p-8 shadow-lg border border-gray-200 hover-scale hover-glow ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
               <div className="flex flex-col h-full">
                 <div className="mb-4">
-                  <svg className="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.13456 9H5.25245C5.25245 10.0938 5.25245 11.5938 6.66054 12.7004C7.77517 13.5942 8.00427 14.9219 8.00427 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M19.8974 9H16.0153C16.0153 10.0938 16.0153 11.5938 17.4234 12.7004C18.538 13.5942 18.7671 14.9219 18.7671 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.13456 9H5.25245C5.25245 10.0938 5.25245 11.5938 6.66054 12.7004C7.77517 13.5942 8.00427 14.9219 8.00427 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M19.8974 9H16.0153C16.0153 10.0938 16.0153 11.5938 17.4234 12.7004C18.538 13.5942 18.7671 14.9219 18.7671 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
                 
                 <p className="text-gray-700 mb-6 flex-grow">{testimonial.content}</p>
                 
-                <div className="mt-auto border-t border-gray-100 pt-4">
+                <div className="mt-auto border-t border-gray-200 pt-4">
                   <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
                   <p className="text-primary text-sm">{testimonial.role}</p>
                 </div>

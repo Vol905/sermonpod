@@ -25,19 +25,65 @@ const PodcastPlayer = () => {
         setIsLoading(true);
         setLoadingError(null);
         
-        // For the purpose of this demo, we'll use a static episode
-        // In a production environment, you would set up a server endpoint to fetch and parse the RSS feed
-        const demoEpisode: PodcastEpisodeType = {
+        // Use a CORS proxy to fetch the RSS feed
+        const corsProxy = 'https://api.allorigins.win/raw?url=';
+        const encodedRssUrl = encodeURIComponent('https://feeds.acast.com/public/shows/67242ddd0e172486e4676e95');
+        const response = await fetch(`${corsProxy}${encodedRssUrl}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch RSS feed');
+        }
+        
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        
+        // Get the first item (latest episode)
+        const latestItem = xmlDoc.querySelector('item');
+        
+        if (!latestItem) {
+          throw new Error('No episodes found in the RSS feed');
+        }
+        
+        // Extract episode details
+        const title = latestItem.querySelector('title')?.textContent || 'Unknown Title';
+        const description = latestItem.querySelector('description')?.textContent || 'No description available';
+        const pubDate = latestItem.querySelector('pubDate')?.textContent || new Date().toUTCString();
+        
+        // Find the audio URL (enclosure)
+        const enclosure = latestItem.querySelector('enclosure');
+        const audioUrl = enclosure?.getAttribute('url') || '';
+        
+        if (!audioUrl) {
+          throw new Error('No audio URL found for the latest episode');
+        }
+        
+        // Format the publication date
+        const formattedDate = new Date(pubDate).toLocaleDateString();
+        
+        // Create the episode object
+        const parsedEpisode: PodcastEpisodeType = {
+          title,
+          description: description.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
+          pubDate: formattedDate,
+          audioUrl
+        };
+        
+        setEpisode(parsedEpisode);
+        console.log('Fetched episode:', parsedEpisode);
+      } catch (error) {
+        console.error('Failed to fetch podcast episode:', error);
+        setLoadingError('Unable to load the latest episode. Please try again later.');
+        
+        // Fallback to a static episode if the fetch fails
+        const fallbackEpisode: PodcastEpisodeType = {
           title: "Reaching New Audiences Through Digital Ministry",
           audioUrl: "https://cdn.acast.com/audio-output/f30a2a09-3946-452d-9a30-82f4a678bba5/a8f07a8b9dba71cee6b49a21c8c89f40-21dd1bdd-2f0b-4c17-b77c-6077064aaf50.mp3",
           description: "In this episode, we discuss effective strategies for expanding your church's reach through digital ministry platforms.",
           pubDate: new Date().toLocaleDateString()
         };
         
-        setEpisode(demoEpisode);
-      } catch (error) {
-        console.error('Failed to fetch podcast episode:', error);
-        setLoadingError('Unable to load the latest episode. Please try again later.');
+        setEpisode(fallbackEpisode);
       } finally {
         setIsLoading(false);
       }
@@ -162,7 +208,7 @@ const PodcastPlayer = () => {
         </div>
         
         <div className={`max-w-4xl mx-auto ${getAnimationClass(isInView, 'animate-scale-in', 300)}`}>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover-glow">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover-glow">
             {isLoading ? (
               <div className="p-8 text-center">
                 <div className="animate-spin mx-auto w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full mb-4"></div>
@@ -209,12 +255,12 @@ const PodcastPlayer = () => {
                   </div>
                 </div>
                 
-                {/* Custom Audio Player */}
-                <div className="rounded-xl bg-gray-50 p-4 border border-gray-100 hover-glow">
+                {/* Custom Audio Player with enhanced contrast */}
+                <div className="rounded-xl bg-gray-100 p-4 border border-gray-200 hover-glow">
                   <audio ref={audioRef} src={episode.audioUrl} preload="metadata" />
                   
                   {/* Progress Bar */}
-                  <div className="relative h-2 bg-gray-200 rounded-full mb-4 cursor-pointer group">
+                  <div className="relative h-2 bg-gray-300 rounded-full mb-4 cursor-pointer group">
                     <div 
                       className="absolute h-full bg-primary rounded-full" 
                       style={{ width: `${progressPercentage}%` }}
@@ -232,7 +278,7 @@ const PodcastPlayer = () => {
                   </div>
                   
                   {/* Time Display */}
-                  <div className="flex justify-between text-xs text-gray-500 mb-4">
+                  <div className="flex justify-between text-xs text-gray-600 mb-4">
                     <span>{formatTime(currentTime)}</span>
                     <span>{formatTime(duration)}</span>
                   </div>
@@ -243,7 +289,7 @@ const PodcastPlayer = () => {
                       {/* Skip Back */}
                       <button 
                         onClick={() => handleSkip(-15)}
-                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-colors"
+                        className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
                         aria-label="Skip back 15 seconds"
                       >
                         <Rewind size={20} />
@@ -261,7 +307,7 @@ const PodcastPlayer = () => {
                       {/* Skip Forward */}
                       <button 
                         onClick={() => handleSkip(15)}
-                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-colors"
+                        className="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
                         aria-label="Skip forward 15 seconds"
                       >
                         <Forward size={20} />
@@ -272,7 +318,7 @@ const PodcastPlayer = () => {
                       {/* Playback Speed */}
                       <button 
                         onClick={handleSpeedChange}
-                        className="px-2 py-1 text-xs font-medium rounded bg-gray-200 hover:bg-gray-300 transition-colors"
+                        className="px-2 py-1 text-xs font-medium rounded bg-gray-300 hover:bg-gray-400 transition-colors"
                         aria-label="Change playback speed"
                       >
                         {speed}x
@@ -282,7 +328,7 @@ const PodcastPlayer = () => {
                       <div className="flex items-center">
                         <button 
                           onClick={toggleMute}
-                          className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition-colors"
+                          className="w-8 h-8 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
                           aria-label={isMuted ? "Unmute" : "Mute"}
                         >
                           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
