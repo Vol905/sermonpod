@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { PodcastEpisodeType } from '@/lib/types';
-import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock, Mic } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
 
 const PodcastPlayer = () => {
