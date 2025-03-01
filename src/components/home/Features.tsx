@@ -40,7 +40,7 @@ const Features = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   return (
-    <section id="features" ref={ref} className="section bg-white">
+    <section id="features" ref={ref} className="section bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
@@ -62,12 +62,15 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={feature.title}
-              className={`bg-white rounded-xl p-6 shadow-lg border-l-4 border-l-blue-500 border-t border-r border-b border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`bg-white rounded-xl p-8 shadow-lg border border-gray-100 
+                hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 
+                group ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
-              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-blue-500/20">
-                <feature.icon className="h-6 w-6 text-blue-500" />
+              <div className="w-14 h-14 rounded-lg bg-blue-500/10 flex items-center justify-center mb-6 
+                  group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300">
+                <feature.icon className="h-7 w-7 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}

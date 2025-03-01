@@ -8,6 +8,7 @@ import Testimonials from '@/components/home/Testimonials';
 import PodcastPlayer from '@/components/home/PodcastPlayer';
 import FAQ from '@/components/home/FAQ';
 import CallToAction from '@/components/home/CallToAction';
+import FloatingBanner from '@/components/layout/FloatingBanner';
 
 const Index = () => {
   // Scroll to top on page load
@@ -18,6 +19,7 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <FloatingBanner />
       <main className="flex-grow">
         <Hero />
         <Features />

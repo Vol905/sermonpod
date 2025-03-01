@@ -40,16 +40,16 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" ref={ref} className="section gradient-bg-light">
+    <section id="faq" ref={ref} className="section bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 text-sm font-medium mb-4">
               Common Questions
             </div>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-gray-900 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
             Frequently Asked Questions
           </h2>
           
@@ -58,30 +58,33 @@ const FAQ = () => {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6 md:p-8">
+        <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
           {faqItems.map((item, index) => (
             <div 
               key={index} 
-              className={`faq-item ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 50))}`}
+              className={`border-b border-gray-100 last:border-0 overflow-hidden transition-all duration-300
+                ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 50))}
+                ${openIndex === index ? 'bg-blue-50/50' : 'hover:bg-gray-50'}`}
             >
               <button 
-                className="faq-question"
+                className="flex w-full justify-between items-center p-6 text-left"
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
-                <span>{item.question}</span>
-                {openIndex === index ? (
-                  <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 text-gray-500 flex-shrink-0" />
-                )}
+                <span className="font-semibold text-gray-900">{item.question}</span>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300
+                  ${openIndex === index ? 'bg-blue-500 rotate-180' : 'bg-gray-100'}`}>
+                  <ChevronDown className={`h-5 w-5 transition-colors ${openIndex === index ? 'text-white' : 'text-gray-500'}`} />
+                </div>
               </button>
               
-              {openIndex === index && (
-                <div className="faq-answer animate-accordion-down">
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+              }`}>
+                <div className="p-6 pt-0 text-gray-600 bg-gradient-to-r from-blue-50/30 to-transparent">
                   <p>{item.answer}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
