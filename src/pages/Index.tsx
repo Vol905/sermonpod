@@ -6,6 +6,7 @@ import Hero from '@/components/home/Hero';
 import Features from '@/components/home/Features';
 import Testimonials from '@/components/home/Testimonials';
 import PodcastPlayer from '@/components/home/PodcastPlayer';
+import FAQ from '@/components/home/FAQ';
 import CallToAction from '@/components/home/CallToAction';
 
 const Index = () => {
@@ -22,6 +23,7 @@ const Index = () => {
         <Features />
         <Testimonials />
         <PodcastPlayer />
+        <FAQ />
         <CallToAction />
       </main>
       <Footer />

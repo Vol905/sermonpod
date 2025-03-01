@@ -7,15 +7,16 @@ const CallToAction = () => {
   
   return (
     <section ref={ref} className="section relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Enhanced background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-primary/5 skew-y-3 -z-10 transform origin-top-right"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-primary/10 rounded-full filter blur-3xl opacity-70 -z-10"></div>
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-5 gap-8 items-center">
             <div className="md:col-span-3">
               <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 hover-lift">
                   Take The Next Step
                 </div>
               </div>
@@ -31,7 +32,7 @@ const CallToAction = () => {
               <div className={`flex flex-wrap gap-4 ${getAnimationClass(isInView, 'animate-fade-in', 300)}`}>
                 <a 
                   href="https://sermonpod.setmore.com" 
-                  className="btn-primary text-base"
+                  className="btn-primary text-base animate-soft-pulse shadow-lg"
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -41,7 +42,7 @@ const CallToAction = () => {
                 
                 <a 
                   href="https://donate.stripe.com/cN26q33Iyako23u6op" 
-                  className="btn-outline text-base"
+                  className="btn-outline text-base hover-glow"
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -51,7 +52,7 @@ const CallToAction = () => {
             </div>
             
             <div className={`md:col-span-2 ${getAnimationClass(isInView, 'animate-scale-in', 200)}`}>
-              <div className="relative">
+              <div className="relative hover-scale hover-glow">
                 <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg">
                   <img 
                     src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=600&h=400" 
@@ -60,7 +61,7 @@ const CallToAction = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="absolute -z-10 -top-4 -left-4 w-full h-full bg-primary/20 rounded-2xl"></div>
+                <div className="absolute -z-10 -top-4 -left-4 w-full h-full bg-primary/30 rounded-2xl"></div>
               </div>
             </div>
           </div>

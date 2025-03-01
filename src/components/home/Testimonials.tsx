@@ -28,7 +28,7 @@ const Testimonials = () => {
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 hover-lift">
               Success Stories
             </div>
           </div>
@@ -46,11 +46,11 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={testimonial.name}
-              className={`bg-white rounded-xl p-8 shadow-sm border border-gray-100 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`bg-white rounded-xl p-8 shadow-md border border-gray-100 hover-scale hover-glow ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
               <div className="flex flex-col h-full">
                 <div className="mb-4">
-                  <svg className="h-8 w-8 text-primary/80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.13456 9H5.25245C5.25245 10.0938 5.25245 11.5938 6.66054 12.7004C7.77517 13.5942 8.00427 14.9219 8.00427 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M19.8974 9H16.0153C16.0153 10.0938 16.0153 11.5938 17.4234 12.7004C18.538 13.5942 18.7671 14.9219 18.7671 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -58,9 +58,9 @@ const Testimonials = () => {
                 
                 <p className="text-gray-700 mb-6 flex-grow">{testimonial.content}</p>
                 
-                <div className="mt-auto">
-                  <h4 className="font-bold">{testimonial.name}</h4>
-                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                <div className="mt-auto border-t border-gray-100 pt-4">
+                  <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
+                  <p className="text-primary text-sm">{testimonial.role}</p>
                 </div>
               </div>
             </div>

@@ -40,11 +40,11 @@ const Features = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   return (
-    <section id="features" ref={ref} className="section bg-gray-50">
+    <section id="features" ref={ref} className="section gradient-bg-light">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 hover-lift">
               Why Choose SermonPod
             </div>
           </div>
@@ -62,12 +62,12 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={feature.title}
-              className={`bg-white rounded-xl p-6 shadow-sm card-hover ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`premium-card border-l-4 border-l-primary/40 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-primary/20">
                 <feature.icon className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h3>
               <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}

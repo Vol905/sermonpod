@@ -16,21 +16,25 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
+    /* Enhanced primary color for more premium feel */
     --primary: 260 60% 55%;
     --primary-foreground: 0 0% 98%;
 
+    /* Secondary color with more contrast */
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
 
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
+    /* Enhanced accent color for highlights */
     --accent: 260 60% 55%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
+    /* Adjusted border color for better contrast */
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 260 60% 55%;
@@ -70,27 +74,56 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out;
+    @apply inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground shadow-md hover:bg-primary/90 h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out hover:shadow-lg hover:translate-y-[-2px];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out;
+    @apply inline-flex items-center justify-center rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out hover:shadow-md hover:translate-y-[-2px];
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out;
+    @apply inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6 py-2 text-sm font-medium transition-all duration-200 ease-in-out hover:shadow-md hover:translate-y-[-2px];
   }
 
   .section {
     @apply py-16 md:py-24 px-4 md:px-8 w-full mx-auto max-w-7xl;
   }
 
+  /* Enhanced card hover effect for premium feel */
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-primary/30;
   }
   
+  /* Premium glass panel effect */
   .glass-panel {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-sm;
+    @apply bg-white/90 backdrop-blur-md border border-white/30 shadow-md;
+  }
+
+  /* New premium card styles */
+  .premium-card {
+    @apply bg-white rounded-xl p-6 shadow-md border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-primary/30;
+  }
+
+  /* Enhanced gradient backgrounds */
+  .gradient-bg-primary {
+    @apply bg-gradient-to-br from-primary/80 to-primary;
+  }
+
+  .gradient-bg-light {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100;
+  }
+
+  /* FAQ accordion styles */
+  .faq-item {
+    @apply border-b border-gray-200 py-5 transition-all duration-300;
+  }
+
+  .faq-question {
+    @apply flex justify-between items-center w-full text-left font-medium text-lg hover:text-primary transition-colors cursor-pointer;
+  }
+
+  .faq-answer {
+    @apply pt-3 text-gray-600;
   }
 }
 
@@ -109,4 +142,33 @@
 }
 .delay-500 {
   animation-delay: 500ms;
+}
+
+/* Enhanced hover animations */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1;
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-[1.02];
+}
+
+.hover-glow {
+  @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(155,135,245,0.3)];
+}
+
+/* Pulse animation for attention */
+@keyframes soft-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 3s ease-in-out infinite;
 }
