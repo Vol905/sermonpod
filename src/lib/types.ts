@@ -1,3 +1,4 @@
+
 export type FeatureType = {
   title: string;
   description: string;
@@ -11,4 +12,25 @@ export type TestimonialType = {
   location?: string;
   image?: string;
   impact?: string;
+};
+
+// Add missing PodcastEpisodeType
+export type PodcastEpisodeType = {
+  title: string;
+  description: string;
+  pubDate: string;
+  audioUrl: string;
+};
+
+// Add missing SocialLinkType
+export type SocialLinkType = {
+  name: string;
+  url: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+// Add missing NavLinkType
+export type NavLinkType = {
+  label: string;
+  url: string;
 };
