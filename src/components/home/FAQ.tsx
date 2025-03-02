@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
 
 // FAQ items
@@ -40,17 +40,26 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" ref={ref} className="section bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto">
+    <section id="faq" ref={ref} className="section relative overflow-hidden bg-gradient-to-b from-purple-50 to-white">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-70 blur-3xl -z-10 transform -translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-50 rounded-full opacity-60 blur-3xl -z-10"></div>
+      <div className="absolute top-1/3 left-1/4 w-6 h-6 bg-yellow-300 rounded-full opacity-50 blur-sm -z-10 animate-pulse-light"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-purple-300 rounded-full opacity-60 blur-sm -z-10 animate-float"></div>
+      
+      <div className="container mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 text-sm font-medium mb-4">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-purple-500/20 to-teal-500/20 text-purple-700 text-sm font-medium mb-4">
+              <Sparkles className="h-4 w-4 mr-2 text-teal-500" />
               Common Questions
             </div>
           </div>
           
           <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-gray-900 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
-            Frequently Asked Questions
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-teal-600">
+              Frequently Asked Questions
+            </span>
           </h2>
           
           <p className={`text-lg text-gray-600 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
@@ -58,30 +67,34 @@ const FAQ = () => {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+        <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100 hover-glow">
           {faqItems.map((item, index) => (
             <div 
               key={index} 
-              className={`border-b border-gray-100 last:border-0 overflow-hidden transition-all duration-300
+              className={`border-b border-purple-100/50 last:border-0 overflow-hidden transition-all duration-300
                 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 50))}
-                ${openIndex === index ? 'bg-blue-50/50' : 'hover:bg-gray-50'}`}
+                ${openIndex === index ? 'bg-gradient-to-r from-purple-50/80 to-transparent' : 'hover:bg-purple-50/50'}`}
             >
               <button 
                 className="flex w-full justify-between items-center p-6 text-left"
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="font-semibold text-gray-900">{item.question}</span>
+                <span className="font-semibold text-gray-800">{item.question}</span>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300
-                  ${openIndex === index ? 'bg-blue-500 rotate-180' : 'bg-gray-100'}`}>
-                  <ChevronDown className={`h-5 w-5 transition-colors ${openIndex === index ? 'text-white' : 'text-gray-500'}`} />
+                  ${openIndex === index ? 'bg-gradient-to-r from-purple-600 to-teal-500 shadow-md' : 'bg-purple-100'}`}>
+                  {openIndex === index ? (
+                    <ChevronUp className="h-5 w-5 text-white" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-purple-600" />
+                  )}
                 </div>
               </button>
               
               <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
                 openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
               }`}>
-                <div className="p-6 pt-0 text-gray-600 bg-gradient-to-r from-blue-50/30 to-transparent">
+                <div className="p-6 pt-0 text-gray-600 bg-gradient-to-r from-purple-50/30 to-transparent">
                   <p>{item.answer}</p>
                 </div>
               </div>
