@@ -14,6 +14,10 @@ const Index = () => {
   // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Add custom CSS variables for the SermonPod color scheme
+    document.documentElement.style.setProperty('--sermonpod-teal', '#4e9999');
+    document.documentElement.style.setProperty('--sermonpod-gold', '#c9a059');
   }, []);
 
   return (

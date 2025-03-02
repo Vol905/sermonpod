@@ -23,7 +23,7 @@ const Hero = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <a 
-                href="#" 
+                href="https://donate.stripe.com/cN26q33Iyako23u6op" 
                 className="btn-primary bg-[#8a57ff] hover:bg-[#7a47ef] text-white px-8 py-3 rounded-md flex items-center justify-center text-base"
               >
                 <span className="mr-2">🎧</span>
@@ -31,8 +31,8 @@ const Hero = () => {
               </a>
               
               <a 
-                href="#" 
-                className="btn-outline text-white border-gray-600 hover:border-white px-8 py-3 rounded-md flex items-center justify-center text-base"
+                href="https://sermonpod-shop.fourthwall.com/en-cad/" 
+                className="btn-outline text-white border border-gray-600 hover:border-white px-8 py-3 rounded-md flex items-center justify-center text-base"
               >
                 <span className="mr-2">🛒</span>
                 Shop Resources

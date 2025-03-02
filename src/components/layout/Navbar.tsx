@@ -29,15 +29,15 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        isScrolled ? 'py-3 shadow-sm' : 'py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <span className="font-display text-xl md:text-2xl font-bold">SermonPod</span>
+            <span className="font-display text-xl md:text-2xl font-bold">SermonPod Ministries</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -46,14 +46,14 @@ const Navbar = () => {
               <a 
                 key={link.label} 
                 href={link.url}
-                className="nav-link text-sm font-medium"
+                className="nav-link text-sm font-medium text-gray-800 hover:text-[#4e9999]"
               >
                 {link.label}
               </a>
             ))}
             <a 
               href="https://sermonpod.setmore.com" 
-              className="btn-primary"
+              className="btn-primary bg-[#1a9cf9] hover:bg-[#0d8de6] text-white px-5 py-2 rounded-md flex items-center justify-center text-sm font-medium"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -94,7 +94,7 @@ const Navbar = () => {
             <div className="pt-4 pb-2 px-4">
               <a 
                 href="https://sermonpod.setmore.com" 
-                className="w-full flex items-center justify-center btn-primary"
+                className="w-full flex items-center justify-center btn-primary bg-[#1a9cf9] hover:bg-[#0d8de6] text-white"
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
