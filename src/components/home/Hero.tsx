@@ -24,7 +24,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <a 
                 href="https://donate.stripe.com/cN26q33Iyako23u6op" 
-                className="btn-primary bg-[#8a57ff] hover:bg-[#7a47ef] text-white px-8 py-3 rounded-md flex items-center justify-center text-base"
+                className="btn-primary bg-[#8957fc] hover:bg-[#7647e1] text-white px-8 py-3 rounded-full flex items-center justify-center text-base"
               >
                 <span className="mr-2">🎧</span>
                 Donate Now
@@ -32,7 +32,7 @@ const Hero = () => {
               
               <a 
                 href="https://sermonpod-shop.fourthwall.com/en-cad/" 
-                className="btn-outline text-white border border-gray-600 hover:border-white px-8 py-3 rounded-md flex items-center justify-center text-base"
+                className="btn-outline bg-white text-black border border-gray-200 hover:border-gray-300 px-8 py-3 rounded-full flex items-center justify-center text-base"
               >
                 <span className="mr-2">🛒</span>
                 Shop Resources
@@ -40,7 +40,7 @@ const Hero = () => {
               
               <a 
                 href="https://sermonpod.setmore.com" 
-                className="btn-primary bg-[#10b981] hover:bg-[#0d9668] text-white px-8 py-3 rounded-md flex items-center justify-center text-base"
+                className="btn-primary bg-[#10b981] hover:bg-[#0d9668] text-white px-8 py-3 rounded-full flex items-center justify-center text-base"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
