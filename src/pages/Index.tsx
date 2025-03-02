@@ -18,6 +18,8 @@ const Index = () => {
     // Add custom CSS variables for the SermonPod color scheme
     document.documentElement.style.setProperty('--sermonpod-teal', '#4e9999');  // Teal from the logo
     document.documentElement.style.setProperty('--sermonpod-gold', '#c9a059');  // Gold from the logo
+    document.documentElement.style.setProperty('--sermonpod-purple', '#7647e1');  // Purple for premium look
+    document.documentElement.style.setProperty('--sermonpod-green', '#10b981');  // Green accent
   }, []);
 
   return (
