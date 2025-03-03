@@ -1,8 +1,8 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { PodcastEpisodeType } from '@/lib/types';
 import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock, Mic, ArrowRight } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const PodcastPlayer = () => {
   const [episode, setEpisode] = useState<PodcastEpisodeType | null>(null);
@@ -18,14 +18,12 @@ const PodcastPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
-  // Fetch the latest episode from the RSS feed via proxy
   useEffect(() => {
     const fetchLatestEpisode = async () => {
       try {
         setIsLoading(true);
         setLoadingError(null);
         
-        // Use a CORS proxy to fetch the RSS feed
         const corsProxy = 'https://api.allorigins.win/raw?url=';
         const encodedRssUrl = encodeURIComponent('https://feeds.acast.com/public/shows/67242ddd0e172486e4676e95');
         const response = await fetch(`${corsProxy}${encodedRssUrl}`);
@@ -38,19 +36,16 @@ const PodcastPlayer = () => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
         
-        // Get the first item (latest episode)
         const latestItem = xmlDoc.querySelector('item');
         
         if (!latestItem) {
           throw new Error('No episodes found in the RSS feed');
         }
         
-        // Extract episode details
         const title = latestItem.querySelector('title')?.textContent || 'Unknown Title';
         const description = latestItem.querySelector('description')?.textContent || 'No description available';
         const pubDate = latestItem.querySelector('pubDate')?.textContent || new Date().toUTCString();
         
-        // Find the audio URL (enclosure)
         const enclosure = latestItem.querySelector('enclosure');
         const audioUrl = enclosure?.getAttribute('url') || '';
         
@@ -58,14 +53,12 @@ const PodcastPlayer = () => {
           throw new Error('No audio URL found for the latest episode');
         }
         
-        // Format the publication date
         const formattedDate = new Date(pubDate).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         });
         
-        // Create the episode object
         const parsedEpisode: PodcastEpisodeType = {
           title,
           description: description.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
@@ -79,7 +72,6 @@ const PodcastPlayer = () => {
         console.error('Failed to fetch podcast episode:', error);
         setLoadingError('Unable to load the latest episode. Please try again later.');
         
-        // Fallback to a static episode if the fetch fails
         const fallbackEpisode: PodcastEpisodeType = {
           title: "Revelation Chapter 7",
           audioUrl: "https://cdn.acast.com/audio-output/f30a2a09-3946-452d-9a30-82f4a678bba5/a8f07a8b9dba71cee6b49a21c8c89f40-21dd1bdd-2f0b-4c17-b77c-6077064aaf50.mp3",
@@ -96,7 +88,6 @@ const PodcastPlayer = () => {
     fetchLatestEpisode();
   }, []);
 
-  // Set up audio event listeners
   useEffect(() => {
     if (!audioRef.current) return;
     
@@ -117,7 +108,6 @@ const PodcastPlayer = () => {
     };
   }, [audioRef.current]);
 
-  // Handle play/pause
   const togglePlayPause = () => {
     if (!audioRef.current) return;
     
@@ -130,7 +120,6 @@ const PodcastPlayer = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // Handle seek
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!audioRef.current) return;
     
@@ -139,7 +128,6 @@ const PodcastPlayer = () => {
     setCurrentTime(newTime);
   };
 
-  // Handle volume
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!audioRef.current) return;
     
@@ -149,7 +137,6 @@ const PodcastPlayer = () => {
     setIsMuted(newVolume === 0);
   };
 
-  // Toggle mute
   const toggleMute = () => {
     if (!audioRef.current) return;
     
@@ -158,11 +145,9 @@ const PodcastPlayer = () => {
     setIsMuted(newMuteState);
   };
 
-  // Handle playback speed change
   const handleSpeedChange = () => {
     if (!audioRef.current) return;
     
-    // Cycle through speeds: 1 -> 1.25 -> 1.5 -> 2 -> 1
     const speeds = [1, 1.25, 1.5, 2];
     const currentIndex = speeds.indexOf(speed);
     const nextIndex = (currentIndex + 1) % speeds.length;
@@ -172,7 +157,6 @@ const PodcastPlayer = () => {
     setSpeed(newSpeed);
   };
 
-  // Skip forward/backward
   const handleSkip = (seconds: number) => {
     if (!audioRef.current) return;
     
@@ -181,7 +165,6 @@ const PodcastPlayer = () => {
     setCurrentTime(newTime);
   };
 
-  // Format time (seconds to MM:SS)
   const formatTime = (time: number) => {
     if (isNaN(time)) return "0:00";
     const minutes = Math.floor(time / 60);
@@ -189,7 +172,6 @@ const PodcastPlayer = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  // Calculate progress percentage
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
@@ -221,13 +203,14 @@ const PodcastPlayer = () => {
             ) : loadingError ? (
               <div className="p-8 text-center">
                 <p className="text-red-500 mb-4">{loadingError}</p>
-                <button 
+                <GradientButton 
                   onClick={() => window.location.reload()}
-                  className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium"
+                  className="inline-flex items-center text-base"
+                  variant="default"
                 >
                   <RefreshCw className="mr-2 h-4 w-4" />
                   Try again
-                </button>
+                </GradientButton>
               </div>
             ) : episode ? (
               <div>
@@ -272,9 +255,9 @@ const PodcastPlayer = () => {
                       <p className="text-sm text-gray-400 mb-3">{episode.pubDate}</p>
                       <p className="text-gray-300 text-sm mb-4">{episode.description}</p>
                       
-                      <button 
+                      <GradientButton 
                         onClick={togglePlayPause}
-                        className="inline-flex items-center justify-center bg-[#8A57FF] hover:bg-[#7A47EF] text-white font-medium py-2 px-4 rounded-md transition-colors"
+                        className="inline-flex items-center justify-center text-base"
                       >
                         {isPlaying ? (
                           <>
@@ -285,15 +268,13 @@ const PodcastPlayer = () => {
                             <Play size={18} className="mr-2" /> Play Episode
                           </>
                         )}
-                      </button>
+                      </GradientButton>
                     </div>
                   </div>
                   
-                  {/* Custom Audio Player with enhanced contrast */}
                   <div className="mt-6">
                     <audio ref={audioRef} src={episode.audioUrl} preload="metadata" />
                     
-                    {/* Progress Bar */}
                     <div className="relative h-1.5 bg-gray-700 rounded-full mb-2 cursor-pointer group">
                       <div 
                         className="absolute h-full bg-blue-500 rounded-full" 
@@ -310,16 +291,13 @@ const PodcastPlayer = () => {
                       />
                     </div>
                     
-                    {/* Time Display */}
                     <div className="flex justify-between text-xs text-gray-400 mb-4">
                       <span>{formatTime(currentTime)}</span>
                       <span>{formatTime(duration)}</span>
                     </div>
                     
-                    {/* Controls */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        {/* Skip Back */}
                         <button 
                           onClick={() => handleSkip(-15)}
                           className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
@@ -328,7 +306,6 @@ const PodcastPlayer = () => {
                           <Rewind size={20} />
                         </button>
                         
-                        {/* Play/Pause */}
                         <button 
                           onClick={togglePlayPause}
                           className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-2 hover:bg-blue-600 transition-colors hover-scale"
@@ -337,7 +314,6 @@ const PodcastPlayer = () => {
                           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
                         </button>
                         
-                        {/* Skip Forward */}
                         <button 
                           onClick={() => handleSkip(15)}
                           className="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
@@ -348,7 +324,6 @@ const PodcastPlayer = () => {
                       </div>
                       
                       <div className="flex items-center space-x-4">
-                        {/* Playback Speed */}
                         <button 
                           onClick={handleSpeedChange}
                           className="px-2 py-1 text-xs font-medium rounded bg-gray-700 hover:bg-gray-600 transition-colors"
@@ -357,7 +332,6 @@ const PodcastPlayer = () => {
                           {speed}x
                         </button>
                         
-                        {/* Volume Controls */}
                         <div className="flex items-center">
                           <button 
                             onClick={toggleMute}

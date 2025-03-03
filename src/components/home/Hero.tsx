@@ -1,6 +1,7 @@
 
 import { ChevronRight } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const Hero = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -22,31 +23,36 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-              <a 
+              <GradientButton 
+                as="a"
                 href="https://donate.stripe.com/cN26q33Iyako23u6op" 
-                className="btn-primary bg-[#8957fc] hover:bg-[#7647e1] text-white px-8 py-3 rounded-full flex items-center justify-center text-base"
+                className="rounded-full flex items-center justify-center text-base"
               >
                 <span className="mr-2">🎧</span>
                 Donate Now
-              </a>
+              </GradientButton>
               
-              <a 
+              <GradientButton 
+                as="a"
                 href="https://sermonpod-shop.fourthwall.com/en-cad/" 
-                className="btn-outline bg-white text-black border border-gray-200 hover:border-gray-300 px-8 py-3 rounded-full flex items-center justify-center text-base"
+                variant="outline"
+                className="bg-white text-black border border-gray-200 hover:border-gray-300 rounded-full flex items-center justify-center text-base"
               >
                 <span className="mr-2">🛒</span>
                 Shop Resources
-              </a>
+              </GradientButton>
               
-              <a 
+              <GradientButton 
+                as="a"
                 href="https://sermonpod.setmore.com" 
-                className="btn-primary bg-[#10b981] hover:bg-[#0d9668] text-white px-8 py-3 rounded-full flex items-center justify-center text-base"
+                variant="secondary"
+                className="rounded-full flex items-center justify-center text-base"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
                 <span className="mr-2">📅</span>
                 Book a Consultation
-              </a>
+              </GradientButton>
             </div>
           </div>
         </div>

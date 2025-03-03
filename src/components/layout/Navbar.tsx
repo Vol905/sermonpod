@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { NavLinkType } from '@/lib/types';
 import { Menu, X, ChevronRight } from 'lucide-react';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const navLinks: NavLinkType[] = [
   { label: 'Home', url: '#' },
@@ -51,15 +52,16 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <a 
+            <GradientButton 
+              as="a"
               href="https://sermonpod.setmore.com" 
-              className="btn-primary bg-[#1a9cf9] hover:bg-[#0d8de6] text-white px-5 py-2 rounded-md flex items-center justify-center text-sm font-medium"
+              className="flex items-center justify-center text-sm"
               target="_blank" 
               rel="noopener noreferrer"
             >
               Book a Free Call
               <ChevronRight className="ml-1 h-4 w-4" />
-            </a>
+            </GradientButton>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -92,16 +94,17 @@ const Navbar = () => {
               </a>
             ))}
             <div className="pt-4 pb-2 px-4">
-              <a 
+              <GradientButton 
+                as="a"
                 href="https://sermonpod.setmore.com" 
-                className="w-full flex items-center justify-center btn-primary bg-[#1a9cf9] hover:bg-[#0d8de6] text-white"
+                className="w-full flex items-center justify-center text-base"
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Book a Free Call
                 <ChevronRight className="ml-1 h-4 w-4" />
-              </a>
+              </GradientButton>
             </div>
           </div>
         </div>
