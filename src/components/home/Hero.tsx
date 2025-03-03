@@ -24,7 +24,6 @@ const Hero = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <GradientButton 
-                as="a"
                 href="https://donate.stripe.com/cN26q33Iyako23u6op" 
                 className="rounded-full flex items-center justify-center text-base"
               >
@@ -33,7 +32,6 @@ const Hero = () => {
               </GradientButton>
               
               <GradientButton 
-                as="a"
                 href="https://sermonpod-shop.fourthwall.com/en-cad/" 
                 variant="outline"
                 className="bg-white text-black border border-gray-200 hover:border-gray-300 rounded-full flex items-center justify-center text-base"
@@ -43,7 +41,6 @@ const Hero = () => {
               </GradientButton>
               
               <GradientButton 
-                as="a"
                 href="https://sermonpod.setmore.com" 
                 variant="secondary"
                 className="rounded-full flex items-center justify-center text-base"

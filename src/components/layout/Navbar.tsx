@@ -53,7 +53,6 @@ const Navbar = () => {
               </a>
             ))}
             <GradientButton 
-              as="a"
               href="https://sermonpod.setmore.com" 
               className="flex items-center justify-center text-sm"
               target="_blank" 
@@ -95,7 +94,6 @@ const Navbar = () => {
             ))}
             <div className="pt-4 pb-2 px-4">
               <GradientButton 
-                as="a"
                 href="https://sermonpod.setmore.com" 
                 className="w-full flex items-center justify-center text-base"
                 target="_blank" 

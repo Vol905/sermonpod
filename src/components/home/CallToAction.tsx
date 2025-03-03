@@ -35,7 +35,6 @@ const CallToAction = () => {
           
           <div className={`flex flex-wrap justify-center gap-4 ${getAnimationClass(isInView, 'animate-fade-in', 300)}`}>
             <GradientButton 
-              as="a"
               href="https://sermonpod.setmore.com" 
               className="text-base"
               target="_blank" 
@@ -46,7 +45,6 @@ const CallToAction = () => {
             </GradientButton>
             
             <GradientButton 
-              as="a"
               href="https://donate.stripe.com/cN26q33Iyako23u6op" 
               variant="secondary"
               className="text-base"
