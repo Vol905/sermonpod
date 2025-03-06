@@ -71,7 +71,7 @@ const Features = () => {
             <div 
               key={feature.title}
               className={`bg-gray-800 rounded-xl overflow-hidden transform transition-all duration-300 
-                hover:-translate-y-2 hover:shadow-[0_10px_40px_-15px_rgba(59,130,246,0.3)] 
+                hover:-translate-y-2 hover:shadow-[0_15px_35px_-5px_rgba(59,130,246,0.3)] border border-gray-700
                 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
               <div className="flex flex-col h-full p-6">

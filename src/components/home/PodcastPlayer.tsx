@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { PodcastEpisodeType } from '@/lib/types';
 import { Play, Pause, Volume2, VolumeX, ChevronRight, RefreshCw, Forward, Rewind, Clock, Mic, ArrowRight } from 'lucide-react';
@@ -196,26 +197,32 @@ const PodcastPlayer = () => {
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section id="podcast" ref={ref} className="section bg-gray-900 text-white">
-      <div className="container mx-auto">
+    <section id="podcast" ref={ref} className="section bg-gray-50 text-gray-900 relative overflow-hidden">
+      {/* Dynamic background elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 opacity-80"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full opacity-30 blur-3xl -z-10 transform -translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-50 rounded-full opacity-30 blur-3xl -z-10"></div>
+      <div className="absolute top-1/2 right-1/4 w-6 h-6 bg-teal-300 rounded-full opacity-30 blur-sm -z-10 animate-pulse-light"></div>
+      
+      <div className="container mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/30 text-blue-400 text-sm font-medium mb-4 hover-lift">
+            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/30 text-blue-700 text-sm font-medium mb-4 hover-lift">
               Latest Episodes
             </div>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-white ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-gray-800 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
             SermonPod Podcast
           </h2>
           
-          <p className={`text-lg text-gray-300 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
+          <p className={`text-lg text-gray-600 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
             Experience the quality and impact of SermonPod's production with our latest episodes.
           </p>
         </div>
         
         <div className={`max-w-4xl mx-auto ${getAnimationClass(isInView, 'animate-scale-in', 300)}`}>
-          <div className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-gray-800 shadow-2xl hover-glow">
+          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl overflow-hidden border border-gray-700 shadow-2xl hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-2">
             {isLoading ? (
               <div className="p-8 text-center">
                 <div className="animate-spin mx-auto w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full mb-4"></div>
@@ -235,9 +242,9 @@ const PodcastPlayer = () => {
               </div>
             ) : episode ? (
               <div>
-                <div className="flex items-center justify-between p-4 border-b border-gray-800">
+                <div className="flex items-center justify-between p-4 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gray-700 rounded-md flex items-center justify-center overflow-hidden">
                       <img 
                         src={podcastArtwork || "/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"} 
                         alt="SermonPod" 
@@ -259,10 +266,10 @@ const PodcastPlayer = () => {
                   </div>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-6 bg-gradient-to-br from-gray-800 to-gray-900">
                   <div className="flex gap-6 mb-6">
                     <div className="w-32 h-32 flex-shrink-0">
-                      <div className="w-full h-full rounded-md overflow-hidden bg-gray-800 relative">
+                      <div className="w-full h-full rounded-md overflow-hidden bg-gray-700 relative">
                         <img 
                           src={episode.imageUrl || podcastArtwork || "/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"}
                           alt="Episode artwork" 
@@ -278,7 +285,7 @@ const PodcastPlayer = () => {
                       
                       <GradientButton 
                         onClick={togglePlayPause}
-                        className="inline-flex items-center justify-center text-base"
+                        className="w-48 rounded-full py-3 bg-gradient-to-r from-purple-900 via-purple-700 to-indigo-800 hover:shadow-[0_8px_25px_-5px_rgba(157,23,77,0.6)] transition-all duration-300"
                       >
                         {isPlaying ? (
                           <>
@@ -296,9 +303,10 @@ const PodcastPlayer = () => {
                   <div className="mt-6">
                     <audio ref={audioRef} src={episode.audioUrl} preload="metadata" />
                     
-                    <div className="relative h-1.5 bg-gray-700 rounded-full mb-2 cursor-pointer group">
+                    <div className="relative h-1.5 bg-gray-700 rounded-full mb-2 cursor-pointer group overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-20"></div>
                       <div 
-                        className="absolute h-full bg-blue-500 rounded-full" 
+                        className="absolute h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" 
                         style={{ width: `${progressPercentage}%` }}
                       ></div>
                       <input 
@@ -329,7 +337,7 @@ const PodcastPlayer = () => {
                         
                         <button 
                           onClick={togglePlayPause}
-                          className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-2 hover:bg-blue-600 transition-colors hover-scale"
+                          className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center mx-2 hover:shadow-[0_0_15px_rgba(99,102,241,0.6)] transition-all hover-scale"
                           aria-label={isPlaying ? "Pause" : "Play"}
                         >
                           {isPlaying ? <Pause size={24} /> : <Play size={24} />}

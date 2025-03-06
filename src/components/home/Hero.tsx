@@ -1,5 +1,4 @@
 
-import { ChevronRight } from 'lucide-react';
 import { useInView, getAnimationClass } from '@/lib/animations';
 import { GradientButton } from '@/components/ui/gradient-button';
 
@@ -25,7 +24,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <GradientButton 
                 href="https://donate.stripe.com/cN26q33Iyako23u6op" 
-                className="rounded-full flex items-center justify-center text-base"
+                className="w-48 rounded-full py-3 bg-gradient-to-r from-purple-900 via-purple-700 to-indigo-800 hover:shadow-[0_8px_25px_-5px_rgba(157,23,77,0.6)] transition-all duration-300"
               >
                 <span className="mr-2">🎧</span>
                 Donate Now
@@ -34,7 +33,7 @@ const Hero = () => {
               <GradientButton 
                 href="https://sermonpod-shop.fourthwall.com/en-cad/" 
                 variant="outline"
-                className="bg-white text-black border border-gray-200 hover:border-gray-300 rounded-full flex items-center justify-center text-base"
+                className="w-48 bg-white text-black border border-gray-200 hover:border-gray-300 rounded-full py-3 hover:shadow-[0_8px_25px_-5px_rgba(59,130,246,0.6)] transition-all duration-300"
               >
                 <span className="mr-2">🛒</span>
                 Shop Resources
@@ -43,7 +42,7 @@ const Hero = () => {
               <GradientButton 
                 href="https://sermonpod.setmore.com" 
                 variant="secondary"
-                className="rounded-full flex items-center justify-center text-base"
+                className="w-48 rounded-full py-3 bg-gradient-to-r from-blue-900 via-blue-700 to-teal-800 hover:shadow-[0_8px_25px_-5px_rgba(59,130,246,0.6)] transition-all duration-300"
                 target="_blank" 
                 rel="noopener noreferrer"
               >

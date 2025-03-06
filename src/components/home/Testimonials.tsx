@@ -34,7 +34,7 @@ const Testimonials = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   return (
-    <section id="testimonials" ref={ref} className="section bg-gradient-to-b from-purple-50 to-white relative overflow-hidden py-20">
+    <section id="testimonials" ref={ref} className="section bg-gray-50 relative overflow-hidden py-20">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-70 blur-3xl -z-10 transform -translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-50 rounded-full opacity-60 blur-3xl -z-10"></div>
@@ -63,7 +63,7 @@ const Testimonials = () => {
             <div 
               key={testimonial.name}
               className={`bg-gray-800 rounded-xl overflow-hidden transform transition-all duration-300 
-                hover:-translate-y-2 hover:shadow-[0_10px_40px_-15px_rgba(59,130,246,0.3)] 
+                hover:-translate-y-2 hover:shadow-[0_15px_35px_-5px_rgba(59,130,246,0.3)] border border-gray-700
                 ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
               <div className="flex flex-col h-full">

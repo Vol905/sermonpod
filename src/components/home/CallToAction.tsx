@@ -7,7 +7,7 @@ const CallToAction = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   return (
-    <section ref={ref} className="section relative overflow-hidden bg-gradient-to-b from-purple-50 to-white">
+    <section ref={ref} className="section relative overflow-hidden bg-gray-50">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-70 blur-3xl -z-10 transform -translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-50 rounded-full opacity-60 blur-3xl -z-10"></div>
@@ -36,7 +36,7 @@ const CallToAction = () => {
           <div className={`flex flex-wrap justify-center gap-4 ${getAnimationClass(isInView, 'animate-fade-in', 300)}`}>
             <GradientButton 
               href="https://sermonpod.setmore.com" 
-              className="text-base"
+              className="w-48 rounded-full py-3 bg-gradient-to-r from-purple-900 via-purple-700 to-indigo-800 hover:shadow-[0_8px_25px_-5px_rgba(157,23,77,0.6)] transition-all duration-300"
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -47,7 +47,7 @@ const CallToAction = () => {
             <GradientButton 
               href="https://donate.stripe.com/cN26q33Iyako23u6op" 
               variant="secondary"
-              className="text-base"
+              className="w-48 rounded-full py-3 bg-gradient-to-r from-blue-900 via-blue-700 to-teal-800 hover:shadow-[0_8px_25px_-5px_rgba(59,130,246,0.6)] transition-all duration-300"
               target="_blank" 
               rel="noopener noreferrer"
             >
