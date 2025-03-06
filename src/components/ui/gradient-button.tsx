@@ -1,30 +1,30 @@
+
 import * as React from "react";
-import Link from "next/link";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "relative z-10 overflow-hidden bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] before:absolute before:inset-0 before:-z-10 before:translate-y-[100%] before:bg-gradient-to-r before:from-indigo-600 before:to-purple-600 before:transition-transform before:duration-300 hover:before:translate-y-0",
-        destructive:
-          "relative z-10 overflow-hidden bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] before:absolute before:inset-0 before:-z-10 before:translate-y-[100%] before:bg-gradient-to-r before:from-pink-500 before:to-red-500 before:transition-transform before:duration-300 hover:before:translate-y-0",
-        outline:
-          "relative z-10 overflow-hidden border border-input bg-background shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground",
+          "bg-gradient-to-tr from-blue-500 to-indigo-600 text-primary-foreground shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:from-blue-600 hover:to-indigo-700 focus-visible:ring-blue-500",
         secondary:
-          "relative z-10 overflow-hidden bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-[0_4px_10px_rgba(0,0,0,0.03)] before:absolute before:inset-0 before:-z-10 before:translate-y-[100%] before:bg-gradient-to-r before:from-emerald-500 before:to-teal-500 before:transition-transform before:duration-300 hover:before:translate-y-0",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-gradient-to-tr from-purple-500 to-pink-600 text-secondary-foreground shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:from-purple-600 hover:to-pink-700 focus-visible:ring-purple-500",
+        destructive:
+          "bg-gradient-to-tr from-red-500 to-orange-600 text-destructive-foreground shadow-lg shadow-red-500/20 hover:shadow-red-500/40 hover:from-red-600 hover:to-orange-700 focus-visible:ring-red-500",
+        outline:
+          "border-2 border-primary bg-transparent hover:bg-primary/10 text-primary shadow-sm",
+        ghost:
+          "bg-transparent text-primary hover:bg-muted hover:text-primary",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-11 px-6 py-3",
+        sm: "h-9 px-3 py-2",
+        lg: "h-14 px-8 py-4 text-lg",
+        icon: "h-9 w-9",
       },
     },
     defaultVariants: {
@@ -46,13 +46,22 @@ export interface ButtonProps
 const GradientButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, href, target, rel, ...props }, ref) => {
     if (href) {
+      // Create proper HTML attributes for anchor element, excluding button-specific props
+      const anchorProps: React.AnchorHTMLAttributes<HTMLAnchorElement> = {
+        href,
+        target,
+        rel,
+        className: cn(buttonVariants({ variant, size, className })),
+      };
+      
+      // Only copy over props that are valid for anchor elements
+      // This approach avoids TypeScript errors from copying button props to anchor elements
+      const { disabled, form, formAction, formEncType, formMethod, formNoValidate, formTarget, name, type, value, ...validAnchorProps } = props;
+      
       return (
         <a
-          href={href}
-          target={target}
-          rel={rel}
-          className={cn(buttonVariants({ variant, size, className }))}
-          {...props}
+          {...anchorProps}
+          {...validAnchorProps as React.AnchorHTMLAttributes<HTMLAnchorElement>}
         />
       );
     }
@@ -67,7 +76,6 @@ const GradientButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
-
 GradientButton.displayName = "GradientButton";
 
 export { GradientButton, buttonVariants };

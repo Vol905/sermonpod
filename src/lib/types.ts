@@ -14,12 +14,13 @@ export type TestimonialType = {
   impact?: string;
 };
 
-// Add missing PodcastEpisodeType
+// Updated PodcastEpisodeType to include imageUrl
 export type PodcastEpisodeType = {
   title: string;
   description: string;
   pubDate: string;
   audioUrl: string;
+  imageUrl?: string | null;
 };
 
 // Add missing SocialLinkType

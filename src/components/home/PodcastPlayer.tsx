@@ -14,6 +14,7 @@ const PodcastPlayer = () => {
   const [volume, setVolume] = useState(0.8);
   const [speed, setSpeed] = useState(1);
   const [loadingError, setLoadingError] = useState<string | null>(null);
+  const [podcastArtwork, setPodcastArtwork] = useState<string | null>(null);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -36,6 +37,21 @@ const PodcastPlayer = () => {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
         
+        const channelImage = xmlDoc.querySelector('channel > image > url');
+        const itunesImage = xmlDoc.querySelector('channel > itunes\\:image');
+        
+        let artwork = null;
+        if (channelImage && channelImage.textContent) {
+          artwork = channelImage.textContent;
+        } else if (itunesImage && itunesImage.getAttribute('href')) {
+          artwork = itunesImage.getAttribute('href');
+        }
+        
+        if (artwork) {
+          setPodcastArtwork(artwork);
+          console.log('Fetched podcast artwork:', artwork);
+        }
+        
         const latestItem = xmlDoc.querySelector('item');
         
         if (!latestItem) {
@@ -45,6 +61,9 @@ const PodcastPlayer = () => {
         const title = latestItem.querySelector('title')?.textContent || 'Unknown Title';
         const description = latestItem.querySelector('description')?.textContent || 'No description available';
         const pubDate = latestItem.querySelector('pubDate')?.textContent || new Date().toUTCString();
+        
+        const episodeImage = latestItem.querySelector('itunes\\:image');
+        const episodeArtwork = episodeImage ? episodeImage.getAttribute('href') : artwork;
         
         const enclosure = latestItem.querySelector('enclosure');
         const audioUrl = enclosure?.getAttribute('url') || '';
@@ -63,7 +82,8 @@ const PodcastPlayer = () => {
           title,
           description: description.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
           pubDate: formattedDate,
-          audioUrl
+          audioUrl,
+          imageUrl: episodeArtwork || null
         };
         
         setEpisode(parsedEpisode);
@@ -76,7 +96,8 @@ const PodcastPlayer = () => {
           title: "Revelation Chapter 7",
           audioUrl: "https://cdn.acast.com/audio-output/f30a2a09-3946-452d-9a30-82f4a678bba5/a8f07a8b9dba71cee6b49a21c8c89f40-21dd1bdd-2f0b-4c17-b77c-6077064aaf50.mp3",
           description: "Experience the powerful interlude between the sixth and seventh seals as God marks His chosen ones! Witness the sealing of the 144,000 from Israel's tribes and the...",
-          pubDate: "February 28, 2025"
+          pubDate: "February 28, 2025",
+          imageUrl: null
         };
         
         setEpisode(fallbackEpisode);
@@ -218,7 +239,7 @@ const PodcastPlayer = () => {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-gray-800 rounded-md flex items-center justify-center">
                       <img 
-                        src="/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png" 
+                        src={podcastArtwork || "/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"} 
                         alt="SermonPod" 
                         className="h-8 w-8 object-contain"
                       />
@@ -243,7 +264,7 @@ const PodcastPlayer = () => {
                     <div className="w-32 h-32 flex-shrink-0">
                       <div className="w-full h-full rounded-md overflow-hidden bg-gray-800 relative">
                         <img 
-                          src="/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"
+                          src={episode.imageUrl || podcastArtwork || "/lovable-uploads/bfa92956-2255-43a1-a074-b031c82f118c.png"}
                           alt="Episode artwork" 
                           className="w-full h-full object-cover"
                         />
