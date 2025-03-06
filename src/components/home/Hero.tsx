@@ -7,7 +7,7 @@ const Hero = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#111111]">
+    <section ref={ref} className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gray-900 text-white">
       {/* Background texture overlay */}
       <div className="absolute inset-0 bg-[url('/lovable-uploads/d25fc086-4da0-452e-bfa2-76739e55976b.png')] bg-cover bg-center opacity-20"></div>
       

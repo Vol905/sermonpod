@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 w-48",
   {
     variants: {
       variant: {
@@ -58,10 +58,13 @@ const GradientButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // This approach avoids TypeScript errors from copying button props to anchor elements
       const { disabled, form, formAction, formEncType, formMethod, formNoValidate, formTarget, name, type, value, ...validAnchorProps } = props;
       
+      // TypeScript workaround for type compatibility
+      const safeProps = validAnchorProps as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+      
       return (
         <a
           {...anchorProps}
-          {...validAnchorProps as React.AnchorHTMLAttributes<HTMLAnchorElement>}
+          {...safeProps}
         />
       );
     }

@@ -70,24 +70,19 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={feature.title}
-              className={`bg-white rounded-2xl p-8 shadow-xl border border-gray-100 
-                hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 
-                group relative z-10 overflow-hidden ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
+              className={`bg-gray-800 rounded-xl overflow-hidden transform transition-all duration-300 
+                hover:-translate-y-2 hover:shadow-[0_10px_40px_-15px_rgba(59,130,246,0.3)] 
+                ${getAnimationClass(isInView, 'animate-fade-in', 100 + (index * 100))}`}
             >
-              {/* Gradient hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#8957fc]/5 to-[#10b981]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-              
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#8957fc]/10 to-[#10b981]/10 flex items-center justify-center mb-6 
-                  group-hover:from-[#8957fc]/20 group-hover:to-[#10b981]/20 group-hover:scale-110 transition-all duration-300">
-                <feature.icon className="h-8 w-8 text-[#7647e1] group-hover:text-[#5e32c5] transition-colors duration-300" />
+              <div className="flex flex-col h-full p-6">
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <feature.icon className="h-6 w-6 text-blue-300" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                </div>
+                <p className="text-gray-300">{feature.description}</p>
               </div>
-              
-              <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-[#7647e1] transition-colors duration-300">{feature.title}</h3>
-              
-              <p className="text-gray-600 text-lg leading-relaxed">{feature.description}</p>
-              
-              {/* Subtle decorative accent */}
-              <div className="absolute bottom-0 right-0 w-20 h-20 rounded-tl-3xl bg-gradient-to-tl from-[#8957fc]/5 to-[#10b981]/5 -z-10"></div>
             </div>
           ))}
         </div>

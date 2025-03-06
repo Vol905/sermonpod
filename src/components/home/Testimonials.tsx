@@ -34,20 +34,26 @@ const Testimonials = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   return (
-    <section id="testimonials" ref={ref} className="section bg-gray-900 text-white py-20">
+    <section id="testimonials" ref={ref} className="section bg-gradient-to-b from-purple-50 to-white relative overflow-hidden py-20">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-70 blur-3xl -z-10 transform -translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-50 rounded-full opacity-60 blur-3xl -z-10"></div>
+      <div className="absolute top-1/3 left-1/4 w-6 h-6 bg-yellow-300 rounded-full opacity-50 blur-sm -z-10 animate-pulse-light"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-8 h-8 bg-purple-300 rounded-full opacity-60 blur-sm -z-10 animate-float"></div>
+      
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className={getAnimationClass(isInView, 'animate-fade-in')}>
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-sm font-medium mb-4 hover-lift">
+            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-700 text-sm font-medium mb-4 hover-lift">
               Success Stories
             </div>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-white ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-gray-900 ${getAnimationClass(isInView, 'animate-fade-in', 100)}`}>
             Trusted By Church Leaders
           </h2>
           
-          <p className={`text-lg text-gray-300 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
+          <p className={`text-lg text-gray-600 ${getAnimationClass(isInView, 'animate-fade-in', 200)}`}>
             See how SermonPod has helped churches of all sizes expand their reach and impact through podcast ministry.
           </p>
         </div>
